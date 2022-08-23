@@ -1,0 +1,64 @@
+Gramática
+
+prog       -> Programa decl bloco Fimprog
+decl       -> (declaravar)+
+declaravar -> tipo ID  (VIR ID)* SC
+tipo       -> 'numero' | 'texto'
+bloco      -> (cmd)+
+cmd        -> cmdleitura| cmdescrita | cmdattrib | cmdselecao |
+              cmdexp | cmdraiz | cmdtesta | cmdenq
+cmdleitura -> Leia AP ID FP SC
+cmdescrita -> Escreva AP (texto | ID) FP
+cmdattrib  -> ID ATTR expr SC
+cmdselecao -> Se AP ID OPREL (ID | NUMBER) FP
+	      Entao ACH (cmd)+ FCH
+	      (Senao ACH  (cmd)+ FCH)?
+cmdexp     -> Exponencial AP expr FP
+cmdraiz    -> Raiz AP expr FP
+cmdlog     -> Logaritmo AP expr FP
+cmdtesta   -> Testa AP ID FP 
+              ACH
+              (Caso (expr | texto) DPT
+              Op_ach Cmd+ Op_fch)+
+              Op_fch
+CmdEnq     -> Enquanto Op_apr Expr Op_fpr 
+              Op_ach Cmd+ Op_fch
+expr       -> expr (OPSOM | OPSUB) termo | termo
+termo      -> termo (OPMUL | OPDIV) fator | fator
+fator      -> NUMBER | ID | AP expr FP
+texto      -> ASP (NUMBER | ID | ‘ ‘ )+ ASP
+
+
+
+Tokens
+
+OPREL  -> '<=' | '>=' | "<" | ">" | "!=" | "=="   (Operador de Relação)
+ASP    -> '"'                                     (Operador Aspas)
+VIR    -> ','                                     (Operador Virgula)
+AP     -> '('                                     (Operador Abre Parenteses)
+FP     -> ')'                                     (Operador Fecha Parenteses)
+SC     -> '.'                                     (Operador de Pontuação)
+OPSOM  -> '+'			                  (Operador Soma)
+OPSUB  -> '-'			                  (Operador Subtração)
+OPMUL  -> '*'			                  (Operador Multiplicação)
+OPDIV  -> '/'			                  (Operador Divisão)
+ATTR   -> ':='                                    (Operador de Atribuição)
+ACH    -> '{'                                     (Operador Abre Chave)
+FCH    -> '}'                                     (Operador Fecha Chave)
+DPT    -> ':'                                     (Operador Dois Pontos)
+ID     -> (a..z | A..Z)(a..z | A..Z | 0..9)*          
+NUMBER -> (0..9)+('.'(0..9)+)?                    
+Programa -> 'programa'                           
+Fimprog  -> 'fimprog.'                           
+Declare  -> 'declare'                             
+Leia     -> 'leia'                                
+Escreva  -> 'escreva'                             
+Se       -> 'se'                                
+Senao    -> 'senao'                               
+Entao    -> 'entao'                               
+Exponencial -> 'exp'                              
+Raiz     -> 'raiz'                               
+Logaritmo-> 'log'                                
+Testa    -> 'testa'                              
+Caso     -> 'caso'                               
+Enquanto -> 'enquanto' 

@@ -1,0 +1,35 @@
+programa
+
+  numero a, b,c.
+  texto  t1.
+
+  leia(a).
+  leia(b).
+  
+  escreva(a).
+  
+
+  
+  
+  a := 1 + 2 * 3 / b.
+  b := 2.
+  c:=2+2.
+  
+  log(a).
+  
+  raiz(b).
+  
+  exp(c).
+  
+  
+
+  se ( a > b ) entao {
+     escreva (a).
+  }
+  senao {
+     escreva (b).
+  }
+  
+  
+
+fimprog.
