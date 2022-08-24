@@ -35,7 +35,7 @@ André Kazuo Yasui RA 11071215
 
 ## Exemplos de programas testados
 
-Exemplo 1.
+####Exemplo 1
 
 --Input-- input.isi
 
@@ -53,7 +53,7 @@ fimprog.
 
 Semantic error - A variável a não é um texto
 
-Exemplo 2
+####Exemplo 2
 
 --Input-- input.isi
 
@@ -72,7 +72,7 @@ fimprog.
 
 Semantic error - Symbol a already declared
 
-Exemplo 3
+####Exemplo 3
 
 --Input-- input.isi
 
