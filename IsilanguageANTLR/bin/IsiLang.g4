@@ -5,12 +5,7 @@ grammar IsiLang;
 	import br.com.professorisidro.isilanguage.datastructures.IsiVariable;
 	import br.com.professorisidro.isilanguage.datastructures.IsiSymbolTable;
 	import br.com.professorisidro.isilanguage.exceptions.IsiSemanticException;
-	import br.com.professorisidro.isilanguage.ast.IsiProgram;
-	import br.com.professorisidro.isilanguage.ast.AbstractCommand;
-	import br.com.professorisidro.isilanguage.ast.CommandLeitura;
-	import br.com.professorisidro.isilanguage.ast.CommandEscrita;
-	import br.com.professorisidro.isilanguage.ast.CommandAtribuicao;
-	import br.com.professorisidro.isilanguage.ast.CommandDecisao;
+	import br.com.professorisidro.isilanguage.ast.*;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -29,6 +24,8 @@ grammar IsiLang;
 	private String _exprID;
 	private String _exprContent;
 	private String _exprDecision;
+	private String _expoente;
+	private String _exprMat;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
 	
@@ -102,13 +99,10 @@ cmd		:  cmdleitura
  		|  cmdescrita 
  		|  cmdattrib
  		|  cmdselecao  
-		|  cmdexp
- 		|  cmdraiz
- 		|  cmdlog
  		|  cmdtesta
  		|  cmdenq
 		;
-		
+	
 cmdleitura	: 'leia' AP
                      ID { verificaID(_input.LT(-1).getText());
                      	  _readID = _input.LT(-1).getText();
@@ -124,11 +118,12 @@ cmdleitura	: 'leia' AP
 			;
 			
 cmdescrita	: 'escreva' 
-                 AP 
-                 (ID     { verificaID(_input.LT(-1).getText());
-	                       _writeID = _input.LT(-1).getText();
-                         }
-                 | TEXTO { _writeID = _input.LT(-1).getText();}
+                 AP       { _exprContent ="";}
+                 (ID      { verificaID(_input.LT(-1).getText());
+	                        _writeID = _input.LT(-1).getText();
+                          }
+                 | TEXTO  { _writeID = _input.LT(-1).getText();}
+                 | cmdmat { _writeID = _exprContent;}
                  ) 
                  FP 
                  SC
@@ -142,7 +137,9 @@ cmdattrib	:  ID   { verificaID(_input.LT(-1).getText());
                       _exprID = _input.LT(-1).getText();
                     } 
                ATTR { _exprContent = ""; } 
-               expr 
+               (expr
+                | TEXTO {  _exprContent += _input.LT(-1).getText(); }
+               ) 
                SC
                {
                	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
@@ -161,6 +158,7 @@ cmdselecao  :  'se' AP
                           }
                     | NUMBER
                     | TEXTO
+                    | cmdmat {_exprDecision += _exprContent;}
                     )
                     FP 
                     'entao'
@@ -189,23 +187,58 @@ cmdselecao  :  'se' AP
                    	}
                    )?
             ;
- cmdexp		: 'exp'
- 			  AP
- 			  expr {System.out.println("Exponencial");}
+            
+cmdmat		:  cmdexp
+ 			|  cmdraiz
+ 			|  cmdlog
+ 			;
+ 			            
+cmdexp		: 'exp'
+ 			  AP  {_exprMat = "";}
+ 			  (ID {
+ 			  		verificaID(_input.LT(-1).getText());
+ 			  	    _exprMat += _input.LT(-1).getText();
+ 			  }
+ 			  | NUMBER{ _exprMat += _input.LT(-1).getText();
+ 			  	
+ 			  } )
+ 			  VIR
+ 			  NUMBER {_expoente = _input.LT(-1).getText();}
  			  FP
- 			  SC
+ 			  {
+ 			  	CommandExponencial cmd = new CommandExponencial(_exprMat, _expoente);
+ 			  	_exprContent += cmd.toString();
+ 			  }
  			;
  cmdraiz    : 'raiz'
- 			  AP
- 			  expr {System.out.println("Raiz");}
+ 			  AP {_exprMat = "";}
+ 			  (ID { 
+ 			  		verificaID(_input.LT(-1).getText());
+ 			  	    _exprMat = _input.LT(-1).getText();
+ 			  }
+ 			  | NUMBER{ _exprMat = _input.LT(-1).getText();
+ 			  	
+ 			  } )
  			  FP
- 			  SC
+ 			  {
+ 			  	CommandRaiz cmd = new CommandRaiz(_exprMat);
+ 			  	_exprContent += cmd.toString();
+ 			  }
  			;
  cmdlog		: 'log'
- 			  AP
- 			  expr {System.out.println("Logaritmo");}
+ 			  AP {_exprMat = "";}
+ 			  (ID { 
+ 			  		verificaID(_input.LT(-1).getText());
+ 			  	    _exprMat = _input.LT(-1).getText();
+ 			  }
+ 			  | NUMBER{ _exprMat = _input.LT(-1).getText();
+ 			  	
+ 			  } )
  			  FP
- 			  SC
+ 			  {
+ 			  	CommandLog cmd = new CommandLog(_exprMat);
+ 			  	_exprContent += cmd.toString();
+ 			  }
  			;
  			
  cmdtesta	: 'testa'
@@ -260,10 +293,9 @@ fator		: ID { verificaID(_input.LT(-1).getText());
               NUMBER {
               	_exprContent += _input.LT(-1).getText();
               }
+            | cmdmat
             | AP expr FP 
-            | TEXTO {
-            	_exprContent += _input.LT(-1).getText();
-            }
+            
 			;
 			
 TEXTO       : '"' (~'"')* '"'

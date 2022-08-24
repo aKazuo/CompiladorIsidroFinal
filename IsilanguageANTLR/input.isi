@@ -5,19 +5,20 @@ programa
 
   leia(a).
   leia(b).
-  
-  escreva("baratao de cachorro").
-  
+    
   
   a := 1 + 2 * 3 / b.
   b := 2.
-  c:=2+2.
+  c:= 33.
+
+  escreva(c).
   
-  log(a).
+  a := 2 + exp(b, 3)+raiz(c)+log(1).
+  escreva(raiz(b)).
+  escreva(exp(2,1)).
+  escreva(log(2)).
+  c := exp(1,1) + raiz(2) + log(c).
   
-  raiz(b).
-  
-  exp(c).
   
   testa (a){
   caso "bobo":{
@@ -32,7 +33,7 @@ programa
   escreva(a).
   }
 
-  se ( a > b ) entao {
+  se ( a > log(b) ) entao {
      escreva (a).
   }
   senao {
