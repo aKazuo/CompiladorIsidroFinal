@@ -8,9 +8,9 @@ bloco      -> (cmd)+
 cmd        -> cmdleitura| cmdescrita | cmdattrib | cmdselecao |
               cmdexp | cmdraiz | cmdtesta | cmdenq
 cmdleitura -> Leia AP ID FP SC
-cmdescrita -> Escreva AP (texto | ID) FP
+cmdescrita -> Escreva AP (ID | TEXTO) FP
 cmdattrib  -> ID ATTR expr SC
-cmdselecao -> Se AP ID OPREL (ID | NUMBER) FP
+cmdselecao -> Se AP ID OPREL (ID | NUMBER | TEXTO) FP
 	      Entao ACH (cmd)+ FCH
 	      (Senao ACH  (cmd)+ FCH)?
 cmdexp     -> Exponencial AP expr FP
@@ -18,22 +18,21 @@ cmdraiz    -> Raiz AP expr FP
 cmdlog     -> Logaritmo AP expr FP
 cmdtesta   -> Testa AP ID FP 
               ACH
-              (Caso (expr | texto) DPT
-              ACH (cmd)+ FCH)+
+              (Caso (NUMBER | TEXTO) DPT
+              ACH (cmd)+ FCH
+	      )+
               FCH
-cmdenq     -> Enquanto AP expr FP 
+cmdenq     -> Enquanto AP ID OPREL (ID | NUMBER | TEXTO) FP 
               ACH (cmd)+ FCH
 expr       -> expr (OPSOM | OPSUB) termo | termo
 termo      -> termo (OPMUL | OPDIV) fator | fator
-fator      -> NUMBER | ID | AP expr FP
-texto      -> ASP (NUMBER | ID | ‘ ‘ )+ ASP
-
+fator      -> NUMBER | ID | AP expr FP | TEXTO
 
 
 Tokens
 
+TEXTO  -> '"' (~'"')* '"'
 OPREL  -> '<=' | '>=' | "<" | ">" | "!=" | "=="   (Operador de Relação)
-ASP    -> '"'                                     (Operador Aspas)
 VIR    -> ','                                     (Operador Virgula)
 AP     -> '('                                     (Operador Abre Parenteses)
 FP     -> ')'                                     (Operador Fecha Parenteses)
