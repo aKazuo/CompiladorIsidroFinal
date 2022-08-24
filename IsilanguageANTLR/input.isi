@@ -1,45 +1,37 @@
+
+
 programa
 
-  numero a, b,c.
-  texto  t1.
+numero a,b,c,d.
+escreva("Programa Teste").
 
-  leia(a).
-  leia(b).
-    
-  
-  a := 1 + 2 * 3 / b.
-  b := 2.
-  c:= 33.
+leia(a).
+escreva(a).
+b := log(a) + raiz(3).
 
-  escreva(c).
-  
-  a := 2 + exp(b, 3)+raiz(c)+log(1).
-  escreva(raiz(b)).
-  escreva(exp(2,1)).
-  escreva(log(2)).
-  c := exp(1,1) + raiz(2) + log(c).
-  
-  
-  testa (a){
-  caso "bobo":{
-  	escreva(a).
-  	}
-  caso 1: {
-  	escreva(b).
-  }
-  }
-  
-  enquanto (a == "oioi"){
+se(a<b) entao
+{
+    c := a-b.
+    d:= exp(a, 2).
+    c := 1.
+} senao {
+	c:= log(a).
+}
+
+  enquanto (a == 2){
   escreva(a).
   }
 
-  se ( a > log(b) ) entao {
-     escreva (a).
-  }
-  senao {
-     escreva (b).
-  }
-  
-  
+testa (a){
+ caso 1:{
+ 	escreva (b).
+ }
+ caso 2: {
+ 	leia (c).
+ }
+}
+
+c:=1.
+d:= c*a+b.
 
 fimprog.

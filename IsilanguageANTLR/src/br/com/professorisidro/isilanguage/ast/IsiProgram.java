@@ -16,15 +16,16 @@ public class IsiProgram {
 		StringBuilder str = new StringBuilder();
 		str.append("import java.util.Scanner;\n");
 		str.append("public class MainClass{ \n");
-		str.append("  public static void main(String args[]){\n ");
-		str.append("      Scanner _key = new Scanner(System.in);\n");
+		str.append("  public static void main(String args[]){\n\n");
+		str.append("     Scanner _key = new Scanner(System.in);\n\n");
 		for (IsiSymbol symbol: varTable.getAll()) {
-			str.append(symbol.generateJavaCode()+"\n");
+			str.append("      "+symbol.generateJavaCode()+"\n");
 		}
+		str.append("\n");
 		for (AbstractCommand command: comandos) {
-			str.append(command.generateJavaCode()+"\n");
+			str.append("      "+command.generateJavaCode()+"\n");
 		}
-		str.append("  }");
+		str.append("\n  }\n");
 		str.append("}");
 		
 		try {

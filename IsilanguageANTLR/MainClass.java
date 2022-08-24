@@ -1,27 +1,47 @@
 import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
-       Scanner _key = new Scanner(System.in);
-double  a;
-double  b;
-double  c;
-String  t1;
-a= _key.nextDouble();
-b= _key.nextDouble();
-a = 1+2*3/b;
-b = 2;
-c = 33;
-System.out.println(c);
-a = 2+Math.pow(b, 3)+Math.sqrt(c)+Math.log(1);
-System.out.println(Math.sqrt(b));
-System.out.println(Math.pow(2, 1));
-System.out.println(Math.log(2));
-c = Math.pow(1, 1)+Math.sqrt(2)+Math.log(c);
-System.out.println(a);
-System.out.println(b);
-System.out.println(a);
-if (a>Math.log(b)) {
-System.out.println(a);}else {
-System.out.println(b);}
 
-  }}
+     Scanner _key = new Scanner(System.in);
+
+      double  a;
+      double  b;
+      double  c;
+      double  d;
+
+      System.out.println("Programa Teste");
+      a= _key.nextDouble();
+      System.out.println(a);
+      b = Math.log(a)+Math.sqrt(3);
+      
+      if (a<b) {
+      	c = a-b;
+      	d = Math.pow(a, 2);
+      	c = 1;
+      }
+      else {
+      	c = Math.log(a);
+      }
+
+      
+      while (a==2) {
+      	System.out.println(a);
+      }
+
+      
+      switch (a) {
+      	case 1 :{
+			System.out.println(b);
+		}
+
+      	case 2 :{
+			c= _key.nextDouble();
+		}
+
+      }
+
+      c = 1;
+      d = c*a+b;
+
+  }
+}

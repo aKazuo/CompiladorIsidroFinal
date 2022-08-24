@@ -62,10 +62,16 @@ public class IsiLangLexer extends Lexer {
 		private String _exprID;
 		private String _exprContent;
 		private String _exprDecision;
+		private String _exprEnquanto;
+		private String _exprTesta;
+		private String _exprCaso;
 		private String _expoente;
 		private String _exprMat;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
+		private ArrayList<AbstractCommand> listaWhile;
+		private ArrayList<AbstractCommand> listaSwitch;
+		private ArrayList<AbstractCommand> listaCase;
 		
 		public void verificaID(String id){
 			if (!symbolTable.exists(id)){
@@ -82,6 +88,7 @@ public class IsiLangLexer extends Lexer {
 		public void generateCode(){
 			program.generateTarget();
 		}
+		
 
 
 	public IsiLangLexer(CharStream input) {

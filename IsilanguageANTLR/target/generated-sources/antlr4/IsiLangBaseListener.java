@@ -121,6 +121,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCmdcaso(@NotNull IsiLangParser.CmdcasoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdcaso(@NotNull IsiLangParser.CmdcasoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProg(@NotNull IsiLangParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}

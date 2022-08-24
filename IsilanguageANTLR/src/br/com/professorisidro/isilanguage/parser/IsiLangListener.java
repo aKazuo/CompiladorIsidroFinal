@@ -167,6 +167,16 @@ public interface IsiLangListener extends ParseTreeListener {
 	 */
 	void exitCmdtesta(IsiLangParser.CmdtestaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link IsiLangParser#cmdcaso}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdcaso(IsiLangParser.CmdcasoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLangParser#cmdcaso}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdcaso(IsiLangParser.CmdcasoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link IsiLangParser#cmdenq}.
 	 * @param ctx the parse tree
 	 */

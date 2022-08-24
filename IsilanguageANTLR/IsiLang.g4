@@ -24,10 +24,16 @@ grammar IsiLang;
 	private String _exprID;
 	private String _exprContent;
 	private String _exprDecision;
+	private String _exprEnquanto;
+	private String _exprTesta;
+	private String _exprCaso;
 	private String _expoente;
 	private String _exprMat;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
+	private ArrayList<AbstractCommand> listaWhile;
+	private ArrayList<AbstractCommand> listaSwitch;
+	private ArrayList<AbstractCommand> listaCase;
 	
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
@@ -44,6 +50,7 @@ grammar IsiLang;
 	public void generateCode(){
 		program.generateTarget();
 	}
+	
 }
 
 prog	: 'programa' decl bloco  'fimprog.'
@@ -112,6 +119,7 @@ cmdleitura	: 'leia' AP
                      
               {
               	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
+              	
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
               	stack.peek().add(cmd);
               }   
@@ -148,7 +156,9 @@ cmdattrib	:  ID   { verificaID(_input.LT(-1).getText());
 			;
 			
 			
-cmdselecao  :  'se' AP
+cmdselecao  :  'se' AP	  { listaTrue = new ArrayList<AbstractCommand>();
+							listaFalse = new ArrayList<AbstractCommand>();
+						  }
                     ID    { verificaID(_input.LT(-1).getText()); 
                     	    _exprDecision = _input.LT(-1).getText();
                           }
@@ -156,9 +166,9 @@ cmdselecao  :  'se' AP
                     (ID   { verificaID(_input.LT(-1).getText());
                     		_exprDecision += _input.LT(-1).getText();
                           }
-                    | NUMBER
-                    | TEXTO
-                    | cmdmat {_exprDecision += _exprContent;}
+                    | NUMBER { _exprDecision += _input.LT(-1).getText();}
+                    | TEXTO  { _exprDecision += _input.LT(-1).getText();}
+                    | cmdmat { _exprDecision += _exprContent;}
                     )
                     FP 
                     'entao'
@@ -182,10 +192,12 @@ cmdselecao  :  'se' AP
                    	FCH
                    	{
                    		listaFalse = stack.pop();
+                   		
+                   	}
+                   )?{
                    		CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
                    		stack.peek().add(cmd);
-                   	}
-                   )?
+                   }
             ;
             
 cmdmat		:  cmdexp
@@ -210,6 +222,7 @@ cmdexp		: 'exp'
  			  	_exprContent += cmd.toString();
  			  }
  			;
+ 			
  cmdraiz    : 'raiz'
  			  AP {_exprMat = "";}
  			  (ID { 
@@ -218,13 +231,14 @@ cmdexp		: 'exp'
  			  }
  			  | NUMBER{ _exprMat = _input.LT(-1).getText();
  			  	
- 			  } )
+ 			  })
  			  FP
  			  {
  			  	CommandRaiz cmd = new CommandRaiz(_exprMat);
  			  	_exprContent += cmd.toString();
  			  }
  			;
+ 			
  cmdlog		: 'log'
  			  AP {_exprMat = "";}
  			  (ID { 
@@ -242,37 +256,60 @@ cmdexp		: 'exp'
  			;
  			
  cmdtesta	: 'testa'
- 			  AP
- 			  ID {  verificaID(_input.LT(-1).getText());
- 			  	
- 			  }
- 			  FP
- 			  ACH
- 			  ('caso'
- 			  	(NUMBER | TEXTO)
- 			  	DPT
- 			   	ACH
- 			  	(cmd)+
- 			  	FCH
- 			  )+
- 			  FCH {System.out.println("Testa Caso");}
+ 			  AP      { listaSwitch = new ArrayList<AbstractCommand>();
+ 			  		
+				      }
+ 			  ID      { verificaID(_input.LT(-1).getText());
+ 			  	        _exprTesta = _input.LT(-1).getText();
+ 			          }
+ 			  FP      { CommandSwitch1 cmd = new CommandSwitch1(_exprTesta);
+ 			  		    stack.peek().add(cmd);}
+ 			  ACH 	  
+ 			  (cmdcaso)+
+ 			  FCH     { CommandSwitch2 cmd2 = new CommandSwitch2();
+ 			  		    stack.peek().add(cmd2);
+ 			  		  }
  			 ;
+
+ cmdcaso   : 'caso'   { listaCase = new ArrayList<AbstractCommand>();
+ 			  	      }
+ 			  (NUMBER  | TEXTO ){ _exprCaso = _input.LT(-1).getText();} 
+ 			  DPT     
+ 			  ACH     { curThread = new ArrayList<AbstractCommand>(); 
+                        stack.push(curThread);
+                      }
+ 			  (cmd)+
+ 			  FCH     { listaCase = stack.pop();
+ 			  			CommandCase cmd = new CommandCase (_exprCaso, listaCase);
+ 			  		    stack.peek().add(cmd);
+ 			  		  }
+ 		   ;
  			 
  cmdenq 	: 'enquanto'
- 			  AP  
- 			  ID  { verificaID(_input.LT(-1).getText()); }
- 			  OPREL  
- 			  (  ID { verificaID(_input.LT(-1).getText());
- 			  	
+ 			  AP       { listaWhile = new ArrayList<AbstractCommand>();
+ 			  		     _exprEnquanto = "";
+					   }
+ 			  ID       { verificaID(_input.LT(-1).getText());
+ 			  		     _exprEnquanto += _input.LT(-1).getText();
+ 			  }
+ 			  OPREL    { _exprEnquanto += _input.LT(-1).getText();} 
+ 			  ( ID     { verificaID(_input.LT(-1).getText());
+ 			  	         _exprEnquanto += _input.LT(-1).getText();
  			  } 
- 			  	| NUMBER
- 			  	| TEXTO
+ 			  | NUMBER { _exprEnquanto += _input.LT(-1).getText();}
+ 			  | TEXTO  { _exprEnquanto += _input.LT(-1).getText();}
  			  )  
  			  FP
- 			  ACH
- 			  (cmd)+
- 			  FCH {System.out.println("Enquanto");}
- 			;
+ 			  ACH      { curThread = new ArrayList<AbstractCommand>(); 
+                         stack.push(curThread);
+                       }
+ 			  (cmd)+   
+ 			  FCH      { 
+                   		 listaWhile = stack.pop();
+                   		 CommandEnquanto cmd = new CommandEnquanto(_exprEnquanto, listaWhile);
+                   		 stack.peek().add(cmd);
+                 	   }
+ 			  ;
 			
 expr		: expr  
 	          (OPSOM|OPSUB)  { _exprContent += _input.LT(-1).getText();}
