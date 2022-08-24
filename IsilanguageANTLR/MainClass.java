@@ -12,6 +12,9 @@ System.out.println(a);
 a = 1+2*3/b;
 b = 2;
 c = 2+2;
+System.out.println(a);
+System.out.println(b);
+System.out.println(a);
 if (a>b) {
 System.out.println(a);}else {
 System.out.println(b);}

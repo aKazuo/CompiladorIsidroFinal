@@ -8,8 +8,6 @@ programa
   
   escreva(a).
   
-
-  
   
   a := 1 + 2 * 3 / b.
   b := 2.
@@ -21,7 +19,18 @@ programa
   
   exp(c).
   
+  testa (abacaxi){
+  caso 2:{
+  	escreva(a).
+  	}
+  caso 1: {
+  	escreva(b).
+  }
+  }
   
+  enquanto (a > b){
+  escreva(a).
+  }
 
   se ( a > b ) entao {
      escreva (a).

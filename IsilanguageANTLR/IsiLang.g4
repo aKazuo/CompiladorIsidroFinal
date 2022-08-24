@@ -182,44 +182,47 @@ cmdselecao  :  'se' AP
             ;
  cmdexp		: 'exp'
  			  AP
- 			  expr {System.out.print(_input.LT(-1).getText());}
+ 			  expr {System.out.println("Exponencial");}
  			  FP
  			  SC
  			;
  cmdraiz    : 'raiz'
  			  AP
- 			  expr {System.out.print(_input.LT(-1).getText());}
+ 			  expr {System.out.println("Raiz");}
  			  FP
  			  SC
  			;
  cmdlog		: 'log'
  			  AP
- 			  expr {System.out.print(_input.LT(-1).getText());}
+ 			  expr {System.out.println("Logaritmo");}
  			  FP
  			  SC
  			;
  			
  cmdtesta	: 'testa'
  			  AP
- 			  ID {System.out.print(_input.LT(-1).getText());}
+ 			  ID 
  			  FP
  			  ACH
  			  ('caso'
- 			  	(expr | texto) {System.out.print(_input.LT(-1).getText());}
+ 			  	(expr | texto) 
+ 			  	DPT
  			   	ACH
  			  	(cmd)+
  			  	FCH
  			  )+
- 			  FCH
+ 			  FCH {System.out.println("Testa Caso");}
  			 ;
  			 
  cmdenq 	: 'enquanto'
- 			  AP
- 			  expr  {System.out.print(_input.LT(-1).getText());}
+ 			  AP  
+ 			  ID  
+ 			  OPREL  
+ 			  (ID | NUMBER)  
  			  FP
  			  ACH
  			  (cmd)+
- 			  FCH
+ 			  FCH {System.out.println("Enquanto");}
  			;
 			
 expr		: expr  
@@ -284,6 +287,9 @@ ACH  : '{'
      ;
      
 FCH  : '}'
+     ;
+     
+DPT  : ':'
      ;
  
 OPREL : '>' | '<' | '>=' | '<=' | '==' | '!='
