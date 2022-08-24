@@ -125,9 +125,11 @@ cmdleitura	: 'leia' AP
 			
 cmdescrita	: 'escreva' 
                  AP 
-                 (ID | texto) { verificaID(_input.LT(-1).getText());
-	                  _writeID = _input.LT(-1).getText();
-                     } 
+                 (ID     { verificaID(_input.LT(-1).getText());
+	                       _writeID = _input.LT(-1).getText();
+                         }
+                 | TEXTO { _writeID = _input.LT(-1).getText();}
+                 ) 
                  FP 
                  SC
                {
@@ -136,9 +138,9 @@ cmdescrita	: 'escreva'
                }
 			;
 			
-cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
-                    _exprID = _input.LT(-1).getText();
-                   } 
+cmdattrib	:  ID   { verificaID(_input.LT(-1).getText());
+                      _exprID = _input.LT(-1).getText();
+                    } 
                ATTR { _exprContent = ""; } 
                expr 
                SC
@@ -150,9 +152,16 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
 			
 			
 cmdselecao  :  'se' AP
-                    ID    { _exprDecision = _input.LT(-1).getText(); }
+                    ID    { verificaID(_input.LT(-1).getText()); 
+                    	    _exprDecision = _input.LT(-1).getText();
+                          }
                     OPREL { _exprDecision += _input.LT(-1).getText(); }
-                    (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                    (ID   { verificaID(_input.LT(-1).getText());
+                    		_exprDecision += _input.LT(-1).getText();
+                          }
+                    | NUMBER
+                    | TEXTO
+                    )
                     FP 
                     'entao'
                     ACH 
@@ -201,11 +210,13 @@ cmdselecao  :  'se' AP
  			
  cmdtesta	: 'testa'
  			  AP
- 			  ID 
+ 			  ID {  verificaID(_input.LT(-1).getText());
+ 			  	
+ 			  }
  			  FP
  			  ACH
  			  ('caso'
- 			  	(expr | texto) 
+ 			  	(NUMBER | TEXTO)
  			  	DPT
  			   	ACH
  			  	(cmd)+
@@ -216,9 +227,14 @@ cmdselecao  :  'se' AP
  			 
  cmdenq 	: 'enquanto'
  			  AP  
- 			  ID  
+ 			  ID  { verificaID(_input.LT(-1).getText()); }
  			  OPREL  
- 			  (ID | NUMBER)  
+ 			  (  ID { verificaID(_input.LT(-1).getText());
+ 			  	
+ 			  } 
+ 			  	| NUMBER
+ 			  	| TEXTO
+ 			  )  
  			  FP
  			  ACH
  			  (cmd)+
@@ -241,19 +257,16 @@ fator		: ID { verificaID(_input.LT(-1).getText());
 	               _exprContent += _input.LT(-1).getText();
                  } 
             | 
-              NUMBER
-              {
+              NUMBER {
               	_exprContent += _input.LT(-1).getText();
               }
-            |
-              AP expr AP
+            | AP expr FP 
+            | TEXTO {
+            	_exprContent += _input.LT(-1).getText();
+            }
 			;
 			
-texto       : '"'
-			  (NUMBER | ID )+ {
-			  	System.out.println(_input.LT(-1).getText());
-			  }
-			  '"'
+TEXTO       : '"' (~'"')* '"'
 			;
 	
 AP	: '('

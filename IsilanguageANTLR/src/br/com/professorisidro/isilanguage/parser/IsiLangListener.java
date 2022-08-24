@@ -201,14 +201,4 @@ public interface IsiLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFator(IsiLangParser.FatorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link IsiLangParser#texto}.
-	 * @param ctx the parse tree
-	 */
-	void enterTexto(IsiLangParser.TextoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link IsiLangParser#texto}.
-	 * @param ctx the parse tree
-	 */
-	void exitTexto(IsiLangParser.TextoContext ctx);
 }

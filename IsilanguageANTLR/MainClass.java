@@ -8,7 +8,7 @@ double  c;
 String  t1;
 a= _key.nextDouble();
 b= _key.nextDouble();
-System.out.println(a);
+System.out.println("baratao de cachorro");
 a = 1+2*3/b;
 b = 2;
 c = 2+2;

@@ -150,18 +150,6 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTexto(@NotNull IsiLangParser.TextoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTexto(@NotNull IsiLangParser.TextoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTermo(@NotNull IsiLangParser.TermoContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -122,16 +122,6 @@ public interface IsiLangListener extends ParseTreeListener {
 	 */
 	void exitCmdenq(@NotNull IsiLangParser.CmdenqContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link IsiLangParser#texto}.
-	 * @param ctx the parse tree
-	 */
-	void enterTexto(@NotNull IsiLangParser.TextoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link IsiLangParser#texto}.
-	 * @param ctx the parse tree
-	 */
-	void exitTexto(@NotNull IsiLangParser.TextoContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link IsiLangParser#termo}.
 	 * @param ctx the parse tree
 	 */

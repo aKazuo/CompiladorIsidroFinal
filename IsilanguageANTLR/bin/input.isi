@@ -6,7 +6,7 @@ programa
   leia(a).
   leia(b).
   
-  escreva(a).
+  escreva("baratao de cachorro").
   
   
   a := 1 + 2 * 3 / b.
@@ -19,8 +19,8 @@ programa
   
   exp(c).
   
-  testa (abacaxi){
-  caso 2:{
+  testa (a){
+  caso "bobo":{
   	escreva(a).
   	}
   caso 1: {
@@ -28,7 +28,7 @@ programa
   }
   }
   
-  enquanto (a > b){
+  enquanto (a == "oioi"){
   escreva(a).
   }
 
