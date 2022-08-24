@@ -30,7 +30,6 @@ termo      -> termo (OPMUL | OPDIV) fator | fator
 fator      -> NUMBER | ID | cmdmat | AP expr FP 
 
 OBS:  É possível apenas usar os comandos de exp, raiz e log em nos comandos de seleção, escrever e atribuição
-OBS2: 
 
 Tokens
 
