@@ -8,11 +8,13 @@ public class MainClass{
       double  b;
       double  c;
       double  d;
+      String  x;
 
       System.out.println("Programa Teste");
       a= _key.nextDouble();
       System.out.println(a);
       b = Math.log(a)+Math.sqrt(3);
+      x = "a";
       
       if (a<b) {
       	c = a-b;
@@ -29,12 +31,12 @@ public class MainClass{
       }
 
       
-      switch (a) {
-      	case 1 :{
+      switch (x) {
+      	case "a" :{
 			System.out.println(b);
 		}
 
-      	case 2 :{
+      	case "b" :{
 			c= _key.nextDouble();
 		}
 

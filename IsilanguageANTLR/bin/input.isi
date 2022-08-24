@@ -1,37 +1,9 @@
-
-
 programa
 
-numero a,b,c,d.
+numero a.
+texto x.
 escreva("Programa Teste").
 
-leia(a).
-escreva(a).
-b := log(a) + raiz(3).
-
-se(a<b) entao
-{
-    c := a-b.
-    d:= exp(a, 2).
-    c := 1.
-} senao {
-	c:= log(a).
-}
-
-  enquanto (a == 2){
-  escreva(a).
-  }
-
-testa (a){
- caso 1:{
- 	escreva (b).
- }
- caso 2: {
- 	leia (c).
- }
-}
-
-c:=1.
-d:= c*a+b.
+a := "oi".
 
 fimprog.

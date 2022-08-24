@@ -51,6 +51,9 @@ grammar IsiLang;
 		program.generateTarget();
 	}
 	
+	public void checkType(int i){
+		symbolTable.checkType(i);
+	}
 }
 
 prog	: 'programa' decl bloco  'fimprog.'
@@ -75,8 +78,8 @@ declaravar :  tipo ID  {
 	                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
 	                  }
                     } 
-              (  VIR 
-              	 ID {
+                (  VIR 
+               	   ID {
 	                  _varName = _input.LT(-1).getText();
 	                  _varValue = null;
 	                  symbol = new IsiVariable(_varName, _tipo, _varValue);
@@ -87,8 +90,8 @@ declaravar :  tipo ID  {
 	                  	 throw new IsiSemanticException("Symbol "+_varName+" already declared");
 	                  }
                     }
-              )* 
-               SC
+                   )* 
+                   SC
            ;
            
 tipo       : 'numero' { _tipo = IsiVariable.NUMBER;  }
@@ -119,7 +122,7 @@ cmdleitura	: 'leia' AP
                      
               {
               	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-              	
+                System.out.print(var);
               	CommandLeitura cmd = new CommandLeitura(_readID, var);
               	stack.peek().add(cmd);
               }   
@@ -143,10 +146,18 @@ cmdescrita	: 'escreva'
 			
 cmdattrib	:  ID   { verificaID(_input.LT(-1).getText());
                       _exprID = _input.LT(-1).getText();
+                      
                     } 
-               ATTR { _exprContent = ""; } 
-               (expr
-                | TEXTO {  _exprContent += _input.LT(-1).getText(); }
+               ATTR { 
+               		 
+               		  _exprContent = "";
+               } 
+               (expr 
+                | TEXTO {   IsiVariable var = (IsiVariable)symbolTable.get(_exprID);
+                			if(var.getType() == 0)
+                				throw new IsiSemanticException("A variável "+ var.getName() +" não é um texto");
+                			_exprContent += _input.LT(-1).getText();
+                }
                ) 
                SC
                {

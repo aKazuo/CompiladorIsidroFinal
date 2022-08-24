@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import br.com.professorisidro.isilanguage.exceptions.IsiSemanticException;
+
 public class IsiSymbolTable {
 	
 	private HashMap<String, IsiSymbol> map;
@@ -33,6 +35,12 @@ public class IsiSymbolTable {
 		return lista;
 	}
 
-	
+	public void checkType(int type) throws IsiSemanticException  {
+		if (type == 1)
+			return;
+		else{
+			throw new IsiSemanticException("A variável não é um texto");
+		}
+	}
 	
 }

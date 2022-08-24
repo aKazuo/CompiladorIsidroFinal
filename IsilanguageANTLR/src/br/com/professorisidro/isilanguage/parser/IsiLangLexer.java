@@ -131,6 +131,9 @@ public class IsiLangLexer extends Lexer {
 			program.generateTarget();
 		}
 		
+		public void checkType(int i){
+			symbolTable.checkType(i);
+		}
 
 
 	public IsiLangLexer(CharStream input) {

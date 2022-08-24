@@ -140,6 +140,9 @@ public class IsiLangParser extends Parser {
 			program.generateTarget();
 		}
 		
+		public void checkType(int i){
+			symbolTable.checkType(i);
+		}
 
 	public IsiLangParser(TokenStream input) {
 		super(input);
@@ -591,7 +594,7 @@ public class IsiLangParser extends Parser {
 			match(SC);
 
 			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-			              	System.out.print(var);
+			                System.out.print(var);
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
 			              	stack.peek().add(cmd);
 			              
@@ -726,10 +729,14 @@ public class IsiLangParser extends Parser {
 			match(ID);
 			 verificaID(_input.LT(-1).getText());
 			                      _exprID = _input.LT(-1).getText();
+			                      
 			                    
 			setState(110);
 			match(ATTR);
-			 _exprContent = ""; 
+			 
+			               		 
+			               		  _exprContent = "";
+			               
 			setState(115);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
@@ -748,7 +755,11 @@ public class IsiLangParser extends Parser {
 				{
 				setState(113);
 				match(TEXTO);
-				  _exprContent += _input.LT(-1).getText(); 
+				   IsiVariable var = (IsiVariable)symbolTable.get(_exprID);
+				                			if(var.getType() == 0)
+				                				throw new IsiSemanticException("A variável "+ var.getName() +" não é um texto");
+				                			_exprContent += _input.LT(-1).getText();
+				                
 				}
 				break;
 			default:
