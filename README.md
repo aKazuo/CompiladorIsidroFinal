@@ -17,7 +17,7 @@ André Kazuo Yasui RA 11071215
 - [ ] Verificar Atribuições com compatibilidade de tipos (semântica) 	
 - [ ] Possuir operações de Entrada e Saída	
 - [X] Aceitar números decimais 	
-- [ ] Verificar declaração de variávies (não usar variáveis que não foram declaradas)	
+- [X] Verificar declaração de variávies (não usar variáveis que não foram declaradas)	
 - [ ] Verificar se há variáveis declaradas e não-utilizadas (warning)	
 - [ ] Geração de pelo menos 1 linguagem destino (C/Java/Python)
 
