@@ -19,10 +19,11 @@ cmdraiz    -> Raiz AP (ID | NUMBER) FP
 cmdlog     -> Logaritmo AP (ID | NUMBER) FP
 cmdtesta   -> Testa AP ID FP 
               ACH
-              (Caso (NUMBER | TEXTO) DPT
-              ACH (cmd)+ FCH
-	      )+
+              (cmdcaso)+
               FCH
+cmdcaso    -> Caso (NUMBER | TEXTO) DPT
+              ACH (cmd)+ FCH
+	      
 cmdenq     -> Enquanto AP ID OPREL (ID | NUMBER | TEXTO) FP 
               ACH (cmd)+ FCH
 expr       -> expr (OPSOM | OPSUB) termo | termo
