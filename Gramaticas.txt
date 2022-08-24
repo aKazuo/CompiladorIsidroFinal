@@ -19,10 +19,10 @@ cmdlog     -> Logaritmo AP expr FP
 cmdtesta   -> Testa AP ID FP 
               ACH
               (Caso (expr | texto) DPT
-              Op_ach Cmd+ Op_fch)+
-              Op_fch
-CmdEnq     -> Enquanto Op_apr Expr Op_fpr 
-              Op_ach Cmd+ Op_fch
+              ACH (cmd)+ FCH)+
+              FCH
+cmdenq     -> Enquanto AP expr FP 
+              ACH (cmd)+ FCH
 expr       -> expr (OPSOM | OPSUB) termo | termo
 termo      -> termo (OPMUL | OPDIV) fator | fator
 fator      -> NUMBER | ID | AP expr FP
