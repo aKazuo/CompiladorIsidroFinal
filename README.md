@@ -7,6 +7,8 @@ Alan Gustavo Zanatelli da Silva RA: 11108716
 
 André Kazuo Yasui RA 11071215
 
+Matheus Cavalari Barbosa RA 11201810233
+
 Vinícius de Figueiredo Trindade RA 11096415
 
 ## Checklist 
