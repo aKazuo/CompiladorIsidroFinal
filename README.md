@@ -38,7 +38,7 @@ André Kazuo Yasui RA 11071215
 #### Exemplo 1
 
 --Input-- input.isi
-
+```
 programa
 
 numero a.
@@ -48,7 +48,7 @@ escreva("Programa Teste").
 a := "oi".
 
 fimprog.
-
+```
 --Output--
 
 Semantic error - A variável a não é um texto
@@ -78,73 +78,61 @@ Semantic error - Symbol a already declared
 
 programa
 
-  numero a, b,c.
-  texto  t1.
+numero a,b,c.
+texto t.
 
-  leia(a).
-  leia(b).
-    
-  
-  a := 1 + 2 * 3 / b.
-  b := 2.
-  c:= 33.
+t := "oi".
 
-  escreva(c).
-  
-  a := 2 + exp(b, 3)+raiz(c)+log(1).
-  escreva(raiz(b)).
-  escreva(exp(2,1)).
-  escreva(log(2)).
-  c := exp(1,1) + raiz(2) + log(c).
-  
-  
-  testa (a){
-  caso 1:{
-  	escreva(a).
-  	}
-  caso 2: {
-  	escreva(b).
-  }
-  }
-  
-  enquanto (a == 2){
-  escreva(a).
-  }
+leia(a).
 
-  se ( a > log(b) ) entao {
-     escreva (a).
-  }
-  senao {
-     escreva (b).
-  }
-  
-  
+a := raiz(a).
+b := log(10).
+c := exp(a, 2).
+c := raiz(b) + c + exp(2,2).
+
+se (a>b) entao
+{
+	escreva("a e maior que b").
+}senao
+{
+	escreva("b e maior que a").
+}
+
+enquanto(a != b){
+	escreva(a).
+}
+
+testa (t){
+	caso "a":{
+		escreva(a).
+	}
+	caso "oi":{
+		escreva(t).
+	}
+}
 
 fimprog.
+  
 
 
 --Output--
 
 Compilation Successful
+CommandAtribuicao [id=t, expr="oi"]
 CommandLeitura [id=a]
-CommandLeitura [id=b]
-CommandAtribuicao [id=a, expr=1+2*3/b]
-CommandAtribuicao [id=b, expr=2]
-CommandAtribuicao [id=c, expr=33]
-CommandEscrita [id=c]
-CommandAtribuicao [id=a, expr=2+Math.pow(b, 3)+Math.sqrt(c)+Math.log(1)]
-CommandEscrita [id=Math.sqrt(b)]
-CommandEscrita [id=Math.pow(2, 1)]
-CommandEscrita [id=Math.log(2)]
-CommandAtribuicao [id=c, expr=Math.pow(1, 1)+Math.sqrt(2)+Math.log(c)]
-CommandSwitch [condition=a]
-CommandCaso [caso=1, listaCase=[CommandEscrita [id=a]]]
-CommandCaso [caso=2, listaCase=[CommandEscrita [id=b]]]
+CommandAtribuicao [id=a, expr=Math.sqrt(a)]
+CommandAtribuicao [id=b, expr=Math.log(10)]
+CommandAtribuicao [id=c, expr=Math.pow(a, 2)]
+CommandAtribuicao [id=c, expr=Math.sqrt(b)+c+Math.pow(2, 2)]
+CommandDecisao [condition=a>b, listaTrue=[CommandEscrita [id="a e maior que b"]], listaFalse=[CommandEscrita [id="b e maior que a"]]]
+CommandEnquanto [condition=a!=b, listaWhile=[CommandEscrita [id=a]]]
+CommandSwitch [condition=t]
+CommandCaso [caso="a", listaCase=[CommandEscrita [id=a]]]
+CommandCaso [caso="oi", listaCase=[CommandEscrita [id=t]]]
 CommandSwitch - FechaSwitch
-CommandEnquanto [condition=a==2, listaWhile=[CommandEscrita [id=a]]]
-CommandDecisao [condition=a>Math.log(b), listaTrue=[CommandEscrita [id=a]], listaFalse=[CommandEscrita [id=b]]]
 
 --MainClass.java--
+
 import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
@@ -154,42 +142,37 @@ public class MainClass{
       double  a;
       double  b;
       double  c;
-      String  t1;
+      String  t;
 
+      t = "oi";
       a= _key.nextDouble();
-      b= _key.nextDouble();
-      a = 1+2*3/b;
-      b = 2;
-      c = 33;
-      System.out.println(c);
-      a = 2+Math.pow(b, 3)+Math.sqrt(c)+Math.log(1);
-      System.out.println(Math.sqrt(b));
-      System.out.println(Math.pow(2, 1));
-      System.out.println(Math.log(2));
-      c = Math.pow(1, 1)+Math.sqrt(2)+Math.log(c);
+      a = Math.sqrt(a);
+      b = Math.log(10);
+      c = Math.pow(a, 2);
+      c = Math.sqrt(b)+c+Math.pow(2, 2);
       
-      switch (a) {
-      	case 1 :{
+      if (a>b) {
+      	System.out.println("a e maior que b");
+      }
+      else {
+      	System.out.println("b e maior que a");
+      }
+
+      
+      while (a!=b) {
+      	System.out.println(a);
+      }
+
+      
+      switch (t) {
+      	case "a" :{
 			System.out.println(a);
 		}
 
-      	case 2 :{
-			System.out.println(b);
+      	case "oi" :{
+			System.out.println(t);
 		}
 
-      }
-
-      
-      while (a==2) {
-      	System.out.println(a);
-      }
-
-      
-      if (a>Math.log(b)) {
-      	System.out.println(a);
-      }
-      else {
-      	System.out.println(b);
       }
 
 
@@ -249,6 +232,123 @@ public class MainClass{
       	System.out.println("b e maior que a");
       }
 
+
+  }
+}
+
+#### Exemplo 5
+
+--Input-- input.isi
+
+programa
+
+numero idade,idadeFutura.
+escreva("Previsao para 2050").
+escreva("Quantos anos voce faz ou fez em 2022").
+leia(idade).
+
+idadeFutura := idade + 28.
+
+escreva("Em 2050 voce tera  ").
+escreva(idadeFutura).
+escreva("anos").
+
+
+se (idadeFutura > 80) entao
+{
+	escreva("Provavelmente voce estara morto em 2050").
+}senao
+{
+	escreva("Provavelmente voce estara vivo em 2050").
+}
+
+
+fimprog.
+
+--Output---
+
+Compilation Successful
+CommandEscrita [id="Previsao para 2050"]
+CommandEscrita [id="Quantos anos voce faz ou fez em 2022"]
+CommandLeitura [id=idade]
+CommandAtribuicao [id=idadeFutura, expr=idade+28]
+CommandEscrita [id="Em 2050 voce tera  "]
+CommandEscrita [id=idadeFutura]
+CommandEscrita [id="anos"]
+CommandDecisao [condition=idadeFutura>80, listaTrue=[CommandEscrita [id="Provavelmente voce estara morto em 2050"]], listaFalse=[CommandEscrita [id="Provavelmente voce estara vivo em 2050"]]]
+
+--MainClass.java--
+
+import java.util.Scanner;
+public class MainClass{ 
+  public static void main(String args[]){
+
+     Scanner _key = new Scanner(System.in);
+
+      double  idade;
+      double  idadeFutura;
+
+      System.out.println("Previsao para 2050");
+      System.out.println("Quantos anos voce faz ou fez em 2022");
+      idade= _key.nextDouble();
+      idadeFutura = idade+28;
+      System.out.println("Em 2050 voce tera  ");
+      System.out.println(idadeFutura);
+      System.out.println("anos");
+      
+      if (idadeFutura>80) {
+      	System.out.println("Provavelmente voce estara morto em 2050");
+      }
+      else {
+      	System.out.println("Provavelmente voce estara vivo em 2050");
+      }
+
+
+  }
+}
+#### Exemplo 6
+
+--Input-- Input.isi
+
+programa
+
+texto nome.
+escreva("Inicio do teste captura nome").
+escreva("Escreva o seu nome").
+leia(nome).
+
+escreva("Seja bem vindo ao teste Sr(a) ").
+escreva(nome).
+escreva("Fim do teste captura nome").
+
+fimprog.
+
+--Output--
+
+Compilation Successful
+CommandEscrita [id="Inicio do teste captura nome"]
+CommandEscrita [id="Escreva o seu nome"]
+CommandLeitura [id=nome]
+CommandEscrita [id="Seja bem vindo ao teste Sr(a) "]
+CommandEscrita [id=nome]
+CommandEscrita [id="Fim do teste captura nome"]
+
+--MainClass()--
+
+import java.util.Scanner;
+public class MainClass{ 
+  public static void main(String args[]){
+
+     Scanner _key = new Scanner(System.in);
+
+      String  nome;
+
+      System.out.println("Inicio do teste captura nome");
+      System.out.println("Escreva o seu nome");
+      nome= _key.nextLine();
+      System.out.println("Seja bem vindo ao teste Sr(a) ");
+      System.out.println(nome);
+      System.out.println("Fim do teste captura nome");
 
   }
 }
