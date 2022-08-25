@@ -37,6 +37,8 @@ Vinícius de Figueiredo Trindade RA 11096415
 
 ## Vídeo
 
+https://youtu.be/SRV2adS9ENU
+
 ## Exemplos de programas testados
 
 #### Exemplo 1
