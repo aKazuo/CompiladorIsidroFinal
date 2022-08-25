@@ -1,5 +1,5 @@
 # PythonCompiler
-Code used to convert the Isilanguage to C with python
+Code used to convert the Isilanguage to java using ANTLR4
 
 ## Nomes
 André Kazuo Yasui RA 11071215
