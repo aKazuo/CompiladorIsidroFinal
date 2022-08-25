@@ -50,13 +50,14 @@ a := "oi".
 fimprog.
 ```
 --Output--
-
+```
 Semantic error - A variável a não é um texto
+```
 
 #### Exemplo 2
 
 --Input-- input.isi
-
+```
 programa
 
 numero a, a.
@@ -66,7 +67,7 @@ escreva("Oi").
 a := 2
 
 fimprog.
-
+```
 
 --Output--
 
@@ -75,7 +76,7 @@ Semantic error - Symbol a already declared
 #### Exemplo 3
 
 --Input-- input.isi
-
+```
 programa
 
 numero a,b,c.
@@ -112,11 +113,10 @@ testa (t){
 }
 
 fimprog.
-  
-
+```
 
 --Output--
-
+```
 Compilation Successful
 CommandAtribuicao [id=t, expr="oi"]
 CommandLeitura [id=a]
@@ -130,9 +130,9 @@ CommandSwitch [condition=t]
 CommandCaso [caso="a", listaCase=[CommandEscrita [id=a]]]
 CommandCaso [caso="oi", listaCase=[CommandEscrita [id=t]]]
 CommandSwitch - FechaSwitch
-
+```
 --MainClass.java--
-
+```
 import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
@@ -178,11 +178,11 @@ public class MainClass{
 
   }
 }
-
+```
 #### Exemplo 4
 
 --Input-- input.isi
-
+```
 programa
 
 numero a,b,c.
@@ -200,17 +200,17 @@ se (a>b) entao
 }
 
 fimprog.
-
+```
 --Output--
-
+```
 Compilation Successful
 CommandEscrita [id="Teste 1"]
 CommandAtribuicao [id=a, expr=Math.sqrt(20)]
 CommandAtribuicao [id=b, expr=Math.log(10)]
 CommandDecisao [condition=a>b, listaTrue=[CommandEscrita [id="a e maior que b"]], listaFalse=[CommandEscrita [id="b e maior que a"]]]
-
+```
 --MainClass.java--
-
+```
 import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
@@ -235,11 +235,11 @@ public class MainClass{
 
   }
 }
-
+```
 #### Exemplo 5
 
 --Input-- input.isi
-
+```
 programa
 
 numero idade,idadeFutura.
@@ -264,9 +264,9 @@ se (idadeFutura > 80) entao
 
 
 fimprog.
-
+```
 --Output---
-
+```
 Compilation Successful
 CommandEscrita [id="Previsao para 2050"]
 CommandEscrita [id="Quantos anos voce faz ou fez em 2022"]
@@ -276,9 +276,9 @@ CommandEscrita [id="Em 2050 voce tera  "]
 CommandEscrita [id=idadeFutura]
 CommandEscrita [id="anos"]
 CommandDecisao [condition=idadeFutura>80, listaTrue=[CommandEscrita [id="Provavelmente voce estara morto em 2050"]], listaFalse=[CommandEscrita [id="Provavelmente voce estara vivo em 2050"]]]
-
+```
 --MainClass.java--
-
+```
 import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
@@ -306,10 +306,11 @@ public class MainClass{
 
   }
 }
+```
 #### Exemplo 6
 
 --Input-- Input.isi
-
+```
 programa
 
 texto nome.
@@ -322,9 +323,9 @@ escreva(nome).
 escreva("Fim do teste captura nome").
 
 fimprog.
-
+```
 --Output--
-
+```
 Compilation Successful
 CommandEscrita [id="Inicio do teste captura nome"]
 CommandEscrita [id="Escreva o seu nome"]
@@ -332,9 +333,9 @@ CommandLeitura [id=nome]
 CommandEscrita [id="Seja bem vindo ao teste Sr(a) "]
 CommandEscrita [id=nome]
 CommandEscrita [id="Fim do teste captura nome"]
-
+```
 --MainClass()--
-
+```
 import java.util.Scanner;
 public class MainClass{ 
   public static void main(String args[]){
@@ -352,3 +353,4 @@ public class MainClass{
 
   }
 }
+```
