@@ -195,3 +195,60 @@ public class MainClass{
 
   }
 }
+
+#### Exemplo 4
+
+--Input-- input.isi
+
+programa
+
+numero a,b,c.
+escreva("Teste 1").
+
+a := raiz(20).
+b := log(10).
+
+se (a>b) entao
+{
+	escreva("a e maior que b").
+}senao
+{
+	escreva("b e maior que a").
+}
+
+fimprog.
+
+--Output--
+
+Compilation Successful
+CommandEscrita [id="Teste 1"]
+CommandAtribuicao [id=a, expr=Math.sqrt(20)]
+CommandAtribuicao [id=b, expr=Math.log(10)]
+CommandDecisao [condition=a>b, listaTrue=[CommandEscrita [id="a e maior que b"]], listaFalse=[CommandEscrita [id="b e maior que a"]]]
+
+--MainClass.java--
+
+import java.util.Scanner;
+public class MainClass{ 
+  public static void main(String args[]){
+
+     Scanner _key = new Scanner(System.in);
+
+      double  a;
+      double  b;
+      double  c;
+
+      System.out.println("Teste 1");
+      a = Math.sqrt(20);
+      b = Math.log(10);
+      
+      if (a>b) {
+      	System.out.println("a e maior que b");
+      }
+      else {
+      	System.out.println("b e maior que a");
+      }
+
+
+  }
+}
