@@ -594,7 +594,7 @@ public class IsiLangParser extends Parser {
 			match(SC);
 
 			              	IsiVariable var = (IsiVariable)symbolTable.get(_readID);
-			                System.out.print(var);
+			               
 			              	CommandLeitura cmd = new CommandLeitura(_readID, var);
 			              	stack.peek().add(cmd);
 			              

@@ -7,43 +7,18 @@ public class MainClass{
       double  a;
       double  b;
       double  c;
-      double  d;
-      String  x;
 
-      System.out.println("Programa Teste");
-      a= _key.nextDouble();
-      System.out.println(a);
-      b = Math.log(a)+Math.sqrt(3);
-      x = "a";
+      System.out.println("Teste 1");
+      a = Math.sqrt(20);
+      b = Math.log(10);
       
-      if (a<b) {
-      	c = a-b;
-      	d = Math.pow(a, 2);
-      	c = 1;
+      if (a>b) {
+      	System.out.println("a e maior que b");
       }
       else {
-      	c = Math.log(a);
+      	System.out.println("b e maior que a");
       }
 
-      
-      while (a==2) {
-      	System.out.println(a);
-      }
-
-      
-      switch (x) {
-      	case "a" :{
-			System.out.println(b);
-		}
-
-      	case "b" :{
-			c= _key.nextDouble();
-		}
-
-      }
-
-      c = 1;
-      d = c*a+b;
 
   }
 }

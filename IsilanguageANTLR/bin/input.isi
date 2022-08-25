@@ -1,9 +1,17 @@
 programa
 
-numero a.
-texto x.
-escreva("Programa Teste").
+numero a,b,c.
+escreva("Teste 1").
 
-a := "oi".
+a := raiz(20).
+b := log(10).
+
+se (a>b) entao
+{
+	escreva("a e maior que b").
+}senao
+{
+	escreva("b e maior que a").
+}
 
 fimprog.
